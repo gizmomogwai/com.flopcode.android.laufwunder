@@ -1,0 +1,11 @@
+{
+    "title" : "short",
+    "phases" :
+    [
+	{
+	    "comment" : "langsamer DL",
+	    "time" : 2,
+	    "color" : "#0000ff"
+	}
+    ]
+}

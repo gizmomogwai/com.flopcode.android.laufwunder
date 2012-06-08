@@ -1,0 +1,41 @@
+{
+    "title" : "Laufwunder 15",
+    "phases" :
+    [
+	{
+	    "comment" : "langsamer DL",
+	    "time" : 10,
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : 12,
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : 4,
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : 12,
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : 4,
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : 12,
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "langsamer DL",
+	    "time" : 10,
+	    "color" : "#0000ff"
+	}
+    ]
+}

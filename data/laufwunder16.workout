@@ -1,0 +1,11 @@
+{
+    "title" : "Laufwunder 16",
+    "phases" :
+    [
+        {
+	    "comment" : "ruhiger DL",
+	    "time" : 50,
+	    "color" : "#ffff00"
+	}
+    ]
+}
