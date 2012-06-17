@@ -7,21 +7,27 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Phases implements Serializable {
+public class Intervals implements Serializable {
 	private static final long serialVersionUID = 1L;
-	List<Phase> fPhases = new ArrayList<Phase>();
+	List<Interval> fIntervals = new ArrayList<Interval>();
 
-	public Phases(JSONArray a) throws Exception {
+	public Intervals() {}
+	
+	public Intervals(JSONArray a) throws Exception {
 		for (int i = 0; i < a.length(); i++) {
 			JSONObject h = (JSONObject) a.get(i);
-			fPhases.add(new Phase(h));
+			add(new Interval(h));
 		}
 	}
 
+	public void add(Interval interval) {
+		fIntervals.add(interval);	  
+  }
+
 	public long getDurationInMs() {
 		int res = 0;
-		for (Phase phase : fPhases) {
-			res += phase.getDurationInMs();
+		for (Interval interval : fIntervals) {
+			res += interval.getDurationInMs();
 		}
 		return res;
 	}
@@ -30,7 +36,7 @@ public class Phases implements Serializable {
 		return getDurationInMs() / 1000 / 60;
 	}
 
-	public List<Phase> asList() {
-		return fPhases;
+	public List<Interval> asList() {
+		return fIntervals;
 	}
 }

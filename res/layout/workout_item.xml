@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.flopcode.android.laufwunder.view.PhasesView
-        android:id="@+id/phases"
+    <com.flopcode.android.laufwunder.view.IntervalsView
+        android:id="@+id/intervals"
         android:layout_width="match_parent"
         android:layout_height="20dip" />
 

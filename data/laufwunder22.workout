@@ -1,0 +1,11 @@
+{
+    "title" : "Laufwunder 22",
+    "intervals" :
+    [
+	{
+	    "comment" : "ruhiger Dauerlauf mit 3 Steigerungen",
+	    "time" : 50,
+	    "color" : "#0000ff"
+	}
+    ]
+}

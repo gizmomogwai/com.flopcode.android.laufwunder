@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -17,11 +18,11 @@ import android.util.Log;
 public class Workout implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public String fTitle;
-	public Phases fPhases;
+	public Intervals fIntervals;
 
 	public Workout(JSONObject jsonObject) throws Exception {
 		fTitle = (String) jsonObject.get("title");
-		fPhases = new Phases((JSONArray) jsonObject.get("phases"));
+		fIntervals = new Intervals((JSONArray) jsonObject.get("intervals"));
 	}
 
 	public static List<Workout> findAll() {
@@ -33,7 +34,7 @@ public class Workout implements Serializable {
 					return pathname.getAbsolutePath().endsWith(".workout");
 				}
 			});
-
+			Arrays.sort(files);
 			for (File file : files) {
 				try {
 					res.add(new Workout(new JSONObject(getContent(file))));

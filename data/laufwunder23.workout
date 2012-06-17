@@ -1,0 +1,21 @@
+{
+    "title" : "Laufwunder 23",
+    "intervals" :
+    [
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : 10,
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "zügiger Dauerlauf",
+	    "time" : 35,
+	    "color" : "#ffff00"
+	},
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : 10,
+	    "color" : "#0000ff"
+	}
+    ]
+}

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.json.JSONObject;
 
-public class Phase implements Serializable {
+public class Interval implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public String fComment;
 	public String fColor;
@@ -12,18 +12,26 @@ public class Phase implements Serializable {
 	/** time in minutes */
 	public int fTime;
 
-	public Phase(JSONObject object) throws Exception {
+	public Interval(JSONObject object) throws Exception {
 		fTime = object.getInt("time");
 		fComment = object.getString("comment");
 		fColor = object.getString("color");
 	}
 
+	public Interval(String comment, String color, int time) {
+	  fComment = comment;
+	  fColor = color;
+	  fTime = time;
+  }
+
 	public long getDurationInMs() {
-		return fTime * 1000 * 60;
+		return fTime * 1000 * 60; // correct
+//		return fTime * 500;
+//		return fTime * 1000;
 	}
 
-	public long getEndOfPhase(long startOfPhase) {
-		return startOfPhase + getDurationInMs();
+	public long getEndOfInterval(long startOfInterval) {
+		return startOfInterval + getDurationInMs();
   }
 
 	public int getMinutes() {

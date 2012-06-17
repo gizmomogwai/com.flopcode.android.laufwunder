@@ -14,7 +14,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
-import com.flopcode.android.laufwunder.model.Phase;
+import com.flopcode.android.laufwunder.model.Interval;
 import com.flopcode.android.laufwunder.model.Workout;
 
 public class WorkoutService extends Service {
@@ -47,7 +47,7 @@ public class WorkoutService extends Service {
 			fText = string;
 			fHandler = h;
 		}
-
+		
 		public void run() {
 			if (fTextToSpeechAvailable) {
 				Log.i("laufwunder", "finished runnable .-.. playing notification");
@@ -76,39 +76,39 @@ public class WorkoutService extends Service {
 		long startTime = SystemClock.uptimeMillis();
 		Handler h = new Handler(fWorkoutThread.getLooper());
 
-		h.postAtTime(new TextRunnable(h, "ein drittel des ganzen workouts"), startTime + (fWorkout.fPhases.getDurationInMs() / 3));
-		h.postAtTime(new TextRunnable(h, "halbzeit des ganzen workouts"), startTime + fWorkout.fPhases.getDurationInMs() / 2);
-		h.postAtTime(new TextRunnable(h, "zwei drittel des ganzen workouts, weiter so"), startTime + 2 * (fWorkout.fPhases.getDurationInMs() / 3));
-		h.postAtTime(new TextRunnable(h, "fertig"), startTime + fWorkout.fPhases.getDurationInMs());
+		h.postAtTime(new TextRunnable(h, "ein drittel des ganzen workouts"), startTime + (fWorkout.fIntervals.getDurationInMs() / 3));
+		h.postAtTime(new TextRunnable(h, "halbzeit des ganzen workouts"), startTime + fWorkout.fIntervals.getDurationInMs() / 2);
+		h.postAtTime(new TextRunnable(h, "zwei drittel des ganzen workouts, weiter so"), startTime + 2 * (fWorkout.fIntervals.getDurationInMs() / 3));
+		h.postAtTime(new TextRunnable(h, "fertig"), startTime + fWorkout.fIntervals.getDurationInMs());
 
-		// add minute tickers to each phase
-		long startOfPhase = startTime;
-		for (Phase phase : fWorkout.fPhases.asList()) {
-			long next = startOfPhase;
-			h.postAtTime(new TextRunnable(h, "los gehts mit phase " + phase.fComment + " für " + phase.getMinutes() + " minuten"), next);
+		// add minute tickers to each interval
+		long startOfInterval = startTime;
+		for (Interval interval : fWorkout.fIntervals.asList()) {
+			long next = startOfInterval;
+			h.postAtTime(new TextRunnable(h, "los gehts mit interval " + interval.fComment + " für " + interval.getMinutes() + " minuten"), next);
 			next += ONE_MINUTE;
 			while (true) {
-				if (next < phase.getEndOfPhase(startOfPhase)) {
+				if (next < interval.getEndOfInterval(startOfInterval)) {
 					h.postAtTime(new SoundRunnable(this), next);
 				} else {
 					break;
 				}
 				next += ONE_MINUTE;
 			}
-			startOfPhase = phase.getEndOfPhase(startOfPhase);
+			startOfInterval = interval.getEndOfInterval(startOfInterval);
 		}
 
-		// add countdown to end of phase
-		startOfPhase = startTime;
-		for (Phase phase : fWorkout.fPhases.asList()) {
-			long end = phase.getEndOfPhase(startOfPhase);
+		// add countdown to end of interval
+		startOfInterval = startTime;
+		for (Interval interval : fWorkout.fIntervals.asList()) {
+			long end = interval.getEndOfInterval(startOfInterval);
 			addCountdown(h, end, 30);
 			addCountdown(h, end, 15);
 			addCountdown(h, end, 10);
 			for (int i = 5; i > 0; i--) {
 				addCountdown(h, end, i);
 			}
-			startOfPhase = end;
+			startOfInterval = end;
 		}
 	}
 

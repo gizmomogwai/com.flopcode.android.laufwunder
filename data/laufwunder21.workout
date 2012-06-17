@@ -1,9 +1,9 @@
 {
     "title" : "Laufwunder 21",
-    "phases" :
+    "intervals" :
     [
 	{
-	    "comment" : "langsamer DL",
+	    "comment" : "langsamer Dauerlauf",
 	    "time" : 15,
 	    "color" : "#0000ff"
 	},

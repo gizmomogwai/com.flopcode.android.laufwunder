@@ -33,10 +33,10 @@ public class Workouts extends Activity {
 				}
 				TextView tv = (TextView) target.findViewById(R.id.title);
 				Workout w = workouts.get(position);
-				tv.setText(w.fTitle + " (" + w.fPhases.getDurationInMinutes() + "m)");
+				tv.setText(w.fTitle + " (" + w.fIntervals.getDurationInMinutes() + "m)");
 
-				PhasesView pv = (PhasesView) target.findViewById(R.id.phases);
-				pv.setPhases(w.fPhases);
+				IntervalsView pv = (IntervalsView) target.findViewById(R.id.intervals);
+				pv.setIntervals(w.fIntervals);
 
 				return target;
 			}
