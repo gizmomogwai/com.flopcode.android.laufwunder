@@ -16,17 +16,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flopcode.android.laufwunder.R;
 import com.flopcode.android.laufwunder.model.Workout;
 import com.flopcode.android.laufwunder.service.WorkoutService;
 import com.flopcode.android.laufwunder.service.WorkoutService.LocalBinder;
 
-public class Workouts extends Activity  {
+public class Workouts extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		final List<Workout> workouts = Workout.findAll();
 		ListView lv = (ListView) findViewById(R.id.workouts);
 		ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(this, R.layout.workout_item, R.id.workout_title) {
@@ -42,12 +43,12 @@ public class Workouts extends Activity  {
 
 				IntervalsView pv = (IntervalsView) target.findViewById(R.id.intervals);
 				pv.setIntervals(w.fIntervals);
-				
-				ImageView runIndicator = (ImageView)target.findViewById(R.id.run_indicator);
+
+				ImageView runIndicator = (ImageView) target.findViewById(R.id.run_indicator);
 				runIndicator.setVisibility(View.GONE);
 				if (fService != null) {
 					boolean active = fService.getActiveIndex() == position;
-					
+
 					if (active) {
 						runIndicator.setVisibility(View.VISIBLE);
 						pv.setProgress(fService.getPercentage());
@@ -65,27 +66,44 @@ public class Workouts extends Activity  {
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int idx, long id) {
-				Workout w = workouts.get(idx);
-				Intent i = getServiceIntent();
-				i.putExtra("workout", w);
-				i.putExtra("index", idx);
-				startService(i);
+				if (fService != null) {
+					Toast.makeText(Workouts.this, "Workout already running .. please stop running workout first", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(Workouts.this, RunningWorkout.class));
+				} else {
+					Workout w = workouts.get(idx);
+					Intent i = getServiceIntent();
+					i.putExtra("workout", w);
+					i.putExtra("index", idx);
+					startService(i);
+				}
 			}
 		});
-		
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		bindService(getServiceIntent(), fServiceConnection, 0);
+	}
+
+	@Override
+	protected void onPause() {
+		unbindService(fServiceConnection);
+		super.onPause();
 	}
 
 	private Intent getServiceIntent() {
 		return new Intent(this, WorkoutService.class);
 	}
-	
+
 	private WorkoutService fService;
 	private ServiceConnection fServiceConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			LocalBinder binder = (LocalBinder) service;
 			fService = binder.getService();
 		}
+
 		public void onServiceDisconnected(ComponentName name) {
 			fService = null;
 		}

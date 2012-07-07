@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/workout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout Title" />
+    <TextView
+        android:id="@+id/total_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Time" />
+    <TextView
+        android:id="@+id/total_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="total percentage" />
+    <TextView
+        android:id="@+id/current_interval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Phase" />
+    <TextView
+        android:id="@+id/current_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Percentage" />
+    
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop" />
+
+</LinearLayout>

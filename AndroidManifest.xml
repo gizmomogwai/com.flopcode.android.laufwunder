@@ -20,17 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity
-            android:name=".view.TTS"
-            android:label="tts" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        
+
         <service android:name=".service.WorkoutService" />
+
+        <activity
+            android:name=".view.RunningWorkout"
+            android:label="@string/title_activity_running_workout" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.flopcode.android.laufwunder.view.Workouts" />
+        </activity>
     </application>
 
 </manifest>
