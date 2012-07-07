@@ -1,0 +1,36 @@
+{
+    "title" : "Laufwunder 27",
+    "intervals" :
+    [
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : "10m",
+	    "color" : "#a0a0ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "15m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "5m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "15m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "5m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : "10m",
+	    "color" : "#a0a0ff"
+	}
+    ]
+}

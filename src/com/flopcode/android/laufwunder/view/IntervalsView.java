@@ -20,6 +20,7 @@ public class IntervalsView extends View {
 		fDefaultIntervals.add(new Interval("hello world", "#0000ff", 10));
 	}
 	private Intervals fIntervals = fDefaultIntervals;
+	private float fPercentage = -1;
 
 	public IntervalsView(Context context) {
 		super(context);
@@ -37,10 +38,10 @@ public class IntervalsView extends View {
 		fIntervals = p;
 	}
 
+	Paint p = new Paint();
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		Paint p = new Paint();
 		double totalTime = fIntervals.getDurationInMs();
 		double w = getWidth();
 		double f = w / totalTime;
@@ -51,5 +52,15 @@ public class IntervalsView extends View {
 			canvas.drawRect((int) (current * f), 0, (int) (newCurrent * f), getHeight(), p);
 			current = newCurrent;
 		}
+		if ((fPercentage >= 0) && (fPercentage <= 1)) {
+			int pos = (int) (fPercentage * getWidth());
+			p.setColor(Color.argb(0xff, 0xff, 0xff, 0));
+			canvas.drawLine(pos, 0, pos, getHeight(), p);
+		}
 	}
+
+	public void setProgress(float percentage) {
+		fPercentage  = percentage;
+		postInvalidate();
+  }
 }

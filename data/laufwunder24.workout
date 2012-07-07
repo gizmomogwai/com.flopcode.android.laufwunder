@@ -4,7 +4,7 @@
     [
 	{
 	    "comment" : "langsamer Dauerlauf",
-	    "time" : 80,
+	    "time" : "80m",
 	    "color" : "#0000ff"
 	}
     ]

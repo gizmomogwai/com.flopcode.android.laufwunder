@@ -4,37 +4,87 @@
     [
 	{
 	    "comment" : "langsamer Dauerlauf",
-	    "time" : 15,
+	    "time" : "15m",
 	    "color" : "#0000ff"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 3,
+	    "time" : "3m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "traben",
-	    "time" : 2,
+	    "time" : "2m",
 	    "color" : "#00ff00"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 3,
+	    "time" : "3m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "traben",
-	    "time" : 2,
+	    "time" : "2m",
 	    "color" : "#00ff00"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 3,
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "langsamer DL",
-	    "time" : 15,
+	    "time" : "15m",
 	    "color" : "#0000ff"
 	}
     ]

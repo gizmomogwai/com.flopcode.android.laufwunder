@@ -4,37 +4,37 @@
     [
 	{
 	    "comment" : "langsamer DL",
-	    "time" : 10,
+	    "time" : "10m",
 	    "color" : "#0000ff"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 12,
+	    "time" : "12m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "traben",
-	    "time" : 4,
+	    "time" : "4m",
 	    "color" : "#00ff00"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 12,
+	    "time" : "12m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "traben",
-	    "time" : 4,
+	    "time" : "4m",
 	    "color" : "#00ff00"
 	},
 	{
 	    "comment" : "schnell",
-	    "time" : 12,
+	    "time" : "12m",
 	    "color" : "#ff0000"
 	},
 	{
 	    "comment" : "langsamer DL",
-	    "time" : 10,
+	    "time" : "10m",
 	    "color" : "#0000ff"
 	}
     ]

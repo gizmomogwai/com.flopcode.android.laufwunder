@@ -4,7 +4,7 @@
     [
 	{
 	    "comment" : "ruhiger Dauerlauf mit 3 Steigerungen",
-	    "time" : 50,
+	    "time" : "50m",
 	    "color" : "#0000ff"
 	}
     ]

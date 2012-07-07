@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Laufwunder</string>
+    <string name="run_indicator">Run Indicator</string>
+    <string name="testlauf">Testlauf</string>
 
 </resources>

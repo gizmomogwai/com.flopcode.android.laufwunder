@@ -13,6 +13,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.os.Environment;
 import android.util.Log;
 
 public class Workout implements Serializable {
@@ -27,7 +28,7 @@ public class Workout implements Serializable {
 
 	public static List<Workout> findAll() {
 		List<Workout> res = new ArrayList<Workout>();
-		File f = new File("/sdcard/laufwunder/workouts");
+		File f = new File(Environment.getExternalStorageDirectory() + "/laufwunder/workouts");
 		if (f.exists()) {
 			File[] files = f.listFiles(new FileFilter() {
 				public boolean accept(File pathname) {
@@ -47,14 +48,21 @@ public class Workout implements Serializable {
 	}
 
 	private static String getContent(File file) throws Exception {
-		Reader r = new InputStreamReader(new FileInputStream(file), "UTF-8");
-		StringBuilder res = new StringBuilder();
-		char buffer[] = new char[1024];
-		int read = r.read(buffer);
-		while (read != -1) {
-			res.append(buffer, 0, read);
-			read = r.read(buffer);
+		Reader r = null;
+		try {
+			r = new InputStreamReader(new FileInputStream(file), "UTF-8");
+			StringBuilder res = new StringBuilder();
+			char buffer[] = new char[1024];
+			int read = r.read(buffer);
+			while (read != -1) {
+				res.append(buffer, 0, read);
+				read = r.read(buffer);
+			}
+			return res.toString();
+		} finally {
+			if (r != null) {
+				r.close();
+			}
 		}
-		return res.toString();
 	}
 }

@@ -9,13 +9,21 @@ public class Interval implements Serializable {
 	public String fComment;
 	public String fColor;
 
-	/** time in minutes */
+	/** time in seconds */
 	public int fTime;
 
 	public Interval(JSONObject object) throws Exception {
-		fTime = object.getInt("time");
 		fComment = object.getString("comment");
 		fColor = object.getString("color");
+		String time = object.getString("time");
+		String timeWithoutId = time.substring(0, time.length()-1);
+		if (time.endsWith("s")) {
+			fTime = Integer.parseInt(timeWithoutId);
+		} else if (time.endsWith("m")) {
+			fTime = Integer.parseInt(timeWithoutId) * 60;
+		} else {
+			throw new IllegalArgumentException("could not parse time of interval '" + fComment + "'");
+		}
 	}
 
 	public Interval(String comment, String color, int time) {
@@ -25,9 +33,7 @@ public class Interval implements Serializable {
   }
 
 	public long getDurationInMs() {
-		return fTime * 1000 * 60; // correct
-//		return fTime * 500;
-//		return fTime * 1000;
+		return fTime * 1000;
 	}
 
 	public long getEndOfInterval(long startOfInterval) {
@@ -35,6 +41,6 @@ public class Interval implements Serializable {
   }
 
 	public int getMinutes() {
-	  return fTime;
+	  return fTime / 60;
   }
 }
