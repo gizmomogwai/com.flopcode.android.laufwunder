@@ -75,7 +75,7 @@ public class WorkoutService extends Service {
 	}
 
 	public void postNotification(float progress, String msg) {
-		Notification n = new Notification(R.drawable.ic_launcher, "Laufwunder", System.currentTimeMillis());
+		Notification n = new Notification(R.drawable.running, "Laufwunder", System.currentTimeMillis());
 		n.flags |= Notification.FLAG_NO_CLEAR;
 		Intent intent = new Intent(this, RunningWorkout.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

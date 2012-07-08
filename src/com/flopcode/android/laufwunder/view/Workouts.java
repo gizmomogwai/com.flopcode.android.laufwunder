@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -21,15 +22,18 @@ import android.widget.Toast;
 import com.flopcode.android.laufwunder.R;
 import com.flopcode.android.laufwunder.model.Workout;
 import com.flopcode.android.laufwunder.service.WorkoutService;
+import com.flopcode.android.laufwunder.service.WorkoutService.Listener;
 import com.flopcode.android.laufwunder.service.WorkoutService.LocalBinder;
 
 public class Workouts extends Activity {
+	private ListView fList;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final List<Workout> workouts = Workout.findAll();
-		ListView lv = (ListView) findViewById(R.id.workouts);
+		fList = (ListView) findViewById(R.id.workouts);
 		ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(this, R.layout.workout_item, R.id.workout_title) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -50,6 +54,7 @@ public class Workouts extends Activity {
 					boolean active = fService.getActiveIndex() == position;
 
 					if (active) {
+						((AnimationDrawable) (runIndicator.getBackground())).start();
 						runIndicator.setVisibility(View.VISIBLE);
 						pv.setPercentage(fService.getPercentage());
 					}
@@ -62,9 +67,9 @@ public class Workouts extends Activity {
 		for (Workout workout : workouts) {
 			adapter.add(workout);
 		}
-		lv.setAdapter(adapter);
+		fList.setAdapter(adapter);
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
+		fList.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int idx, long id) {
 				if (fService != null) {
 					Toast.makeText(Workouts.this, "Workout already running .. please stop running workout first", Toast.LENGTH_LONG).show();
@@ -87,8 +92,21 @@ public class Workouts extends Activity {
 		bindService(getServiceIntent(), fServiceConnection, 0);
 	}
 
+	Listener fListener = new Listener() {
+		public void stateChanged() {
+			runOnUiThread(new Runnable() {
+				public void run() {
+					fList.invalidateViews();
+				}
+			});
+		}
+	};
+
 	@Override
 	protected void onPause() {
+		if (fService != null) {
+			fService.removeListener(fListener);
+		}
 		unbindService(fServiceConnection);
 		fService = null;
 		super.onPause();
@@ -103,10 +121,12 @@ public class Workouts extends Activity {
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			LocalBinder binder = (LocalBinder) service;
 			fService = binder.getService();
+			fService.addListener(fListener);
 		}
 
 		public void onServiceDisconnected(ComponentName name) {
 			fService = null;
 		}
 	};
+
 }
