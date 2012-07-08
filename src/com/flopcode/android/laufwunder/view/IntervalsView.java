@@ -59,7 +59,7 @@ public class IntervalsView extends View {
 		}
 	}
 
-	public void setProgress(float percentage) {
+	public void setPercentage(float percentage) {
 		fPercentage  = percentage;
 		postInvalidate();
   }

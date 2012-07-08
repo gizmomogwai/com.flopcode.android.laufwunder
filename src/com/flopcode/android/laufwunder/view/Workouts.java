@@ -51,7 +51,7 @@ public class Workouts extends Activity {
 
 					if (active) {
 						runIndicator.setVisibility(View.VISIBLE);
-						pv.setProgress(fService.getPercentage());
+						pv.setPercentage(fService.getPercentage());
 					}
 				}
 
@@ -90,6 +90,7 @@ public class Workouts extends Activity {
 	@Override
 	protected void onPause() {
 		unbindService(fServiceConnection);
+		fService = null;
 		super.onPause();
 	}
 

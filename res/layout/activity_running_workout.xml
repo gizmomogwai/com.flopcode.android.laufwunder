@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,32 +8,37 @@
         android:id="@+id/workout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Workout Title" />
+        android:textSize="24dip"
+        android:text="@string/workout_title" />
     <TextView
         android:id="@+id/total_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Time" />
-    <TextView
-        android:id="@+id/total_percentage"
+        android:layout_below="@id/workout_title"
+        android:text="Total Time:" />
+    <com.flopcode.android.laufwunder.view.IntervalsView
+        android:id="@+id/intervals"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="total percentage" />
+        android:layout_height="24dip"
+        android:layout_below="@id/total_time"
+        />
     <TextView
         android:id="@+id/current_interval"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Current Phase" />
+        android:layout_below="@id/intervals"
+        android:text="Current Interval" />
     <TextView
         android:id="@+id/current_percentage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/current_interval"
         android:text="Current Percentage" />
-    
     <Button
         android:id="@+id/stop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:text="Stop" />
 
-</LinearLayout>
+</RelativeLayout>

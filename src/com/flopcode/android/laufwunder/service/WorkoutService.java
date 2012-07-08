@@ -78,43 +78,68 @@ public class WorkoutService extends Service {
 		Notification n = new Notification(R.drawable.ic_launcher, "Laufwunder", System.currentTimeMillis());
 		n.flags |= Notification.FLAG_NO_CLEAR;
 		Intent intent = new Intent(this, RunningWorkout.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		
 		n.setLatestEventInfo(getApplicationContext(), fWorkout.fTitle, getCurrentInterval().fComment, pendingIntent);
-		((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(ID, n);
+		getNotificationManager().notify(ID, n);
+	}
+
+	private NotificationManager getNotificationManager() {
+		return (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+	}
+
+	private void removeNotification() {
+		getNotificationManager().cancel(ID);
 	}
 
 	private void init(Intent intent) {
 		fWorkout = (Workout) intent.getExtras().getSerializable("workout");
 		fCurrentIndex = intent.getExtras().getInt("index");
+		fCurrentInterval = fWorkout.fIntervals.asList().get(0);
 
-		if (fWorkoutThread != null) {
-			fWorkoutThread.quit();
-		}
-		fWorkoutThread = new HandlerThread("workout");
-		fWorkoutThread.start();
-
-		fTextToSpeech = new TextToSpeech(this, new OnInitListener() {
-			public void onInit(int status) {
-				fTextToSpeechAvailable = true;
-			}
-		});
+		initWorker();
+		initTTS();
 
 		fStartTime = SystemClock.uptimeMillis();
-		fHandler = new Handler(fWorkoutThread.getLooper());
+	
+		setWorkoutEvents();
 
-		fHandler.postAtTime(new TextRunnable(fHandler, "ein drittel des ganzen workouts"), fStartTime + (fWorkout.fIntervals.getDurationInMs() / 3));
-		fHandler.postAtTime(new TextRunnable(fHandler, "halbzeit des ganzen workouts"), fStartTime + fWorkout.fIntervals.getDurationInMs() / 2);
-		fHandler.postAtTime(new TextRunnable(fHandler, "zwei drittel des ganzen workouts, weiter so"), fStartTime + 2 * (fWorkout.fIntervals.getDurationInMs() / 3));
-		fEndTime = fStartTime + fWorkout.fIntervals.getDurationInMs();
-		fHandler.postAtTime(new TextRunnable(fHandler, "fertig"), fEndTime);
-		fHandler.postAtTime(new Runnable() {
-			public void run() {
-				stopSelf();
+    setIntervalMinuteEvents();
+    addCountdownEvents();
+
+    updateCurrentInterval();
+	}
+
+	private void addCountdownEvents() {
+	  // add count down to end of interval
+		long startOfInterval = fStartTime;
+		for (Interval interval : fWorkout.fIntervals.asList()) {
+			long end = interval.getEndOfInterval(startOfInterval);
+			addCountdown(fHandler, end, 30);
+			addCountdown(fHandler, end, 15);
+			addCountdown(fHandler, end, 10);
+			for (int i = 5; i > 0; i--) {
+				addCountdown(fHandler, end, i);
 			}
-		}, fEndTime + 5 * ONE_SECOND);
+			startOfInterval = end;
+		}
+  }
 
-		// add minute tickers to each interval
+	private void updateCurrentInterval() {
+	  // at set current interval at right time
+		long startOfInterval = fStartTime;
+		for (final Interval interval : fWorkout.fIntervals.asList()) {
+			fHandler.postAtTime(new Runnable() {
+				public void run() {
+					fCurrentInterval = interval;
+				}
+			}, startOfInterval);
+			startOfInterval = interval.getEndOfInterval(startOfInterval);
+		}
+  }
+
+	private void setIntervalMinuteEvents() {
+	  // add minute tickers to each interval
 		long startOfInterval = fStartTime;
 		for (Interval interval : fWorkout.fIntervals.asList()) {
 			long next = startOfInterval;
@@ -130,38 +155,43 @@ public class WorkoutService extends Service {
 			}
 			startOfInterval = interval.getEndOfInterval(startOfInterval);
 		}
+  }
 
-		// at set current interval at right time
-		startOfInterval = fStartTime;
-		for (final Interval interval : fWorkout.fIntervals.asList()) {
-			if (fCurrentInterval == null) {
-				fCurrentInterval = interval;
+	private void setWorkoutEvents() {
+	  fHandler.postAtTime(new TextRunnable(fHandler, "ein drittel des ganzen workouts"), fStartTime + (fWorkout.fIntervals.getDurationInMs() / 3));
+		fHandler.postAtTime(new TextRunnable(fHandler, "halbzeit des ganzen workouts"), fStartTime + fWorkout.fIntervals.getDurationInMs() / 2);
+		fHandler.postAtTime(new TextRunnable(fHandler, "zwei drittel des ganzen workouts, weiter so"), fStartTime + 2 * (fWorkout.fIntervals.getDurationInMs() / 3));
+		fEndTime = fStartTime + fWorkout.fIntervals.getDurationInMs();
+		fHandler.postAtTime(new TextRunnable(fHandler, "fertig"), fEndTime);
+		fHandler.postAtTime(new Runnable() {
+			public void run() {
+				stopSelf();
 			}
-			fHandler.postAtTime(new Runnable() {
-				public void run() {
-					fCurrentInterval = interval;
-				}
-			}, startOfInterval);
-			startOfInterval = interval.getEndOfInterval(startOfInterval);
-		}
+		}, fEndTime + 5 * ONE_SECOND);
+  }
 
-		// add count down to end of interval
-		startOfInterval = fStartTime;
-		for (Interval interval : fWorkout.fIntervals.asList()) {
-			long end = interval.getEndOfInterval(startOfInterval);
-			addCountdown(fHandler, end, 30);
-			addCountdown(fHandler, end, 15);
-			addCountdown(fHandler, end, 10);
-			for (int i = 5; i > 0; i--) {
-				addCountdown(fHandler, end, i);
+	private void initTTS() {
+	  fTextToSpeech = new TextToSpeech(this, new OnInitListener() {
+			public void onInit(int status) {
+				fTextToSpeechAvailable = true;
 			}
-			startOfInterval = end;
+		});
+  }
+
+	private void initWorker() {
+	  if (fWorkoutThread != null) {
+			fWorkoutThread.quit();
 		}
-	}
+		fWorkoutThread = new HandlerThread("workout");
+		fWorkoutThread.start();
+		fHandler = new Handler(fWorkoutThread.getLooper());
+  }
 
 	@Override
 	public void onDestroy() {
+		fWorkoutThread.quit();
 		fTextToSpeech.shutdown();
+		removeNotification();
 		super.onDestroy();
 	}
 

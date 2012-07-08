@@ -7,5 +7,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_running_workout">RunningWorkout</string>
+    <string name="workout_title">Laufwunder 20</string>
 
 </resources>

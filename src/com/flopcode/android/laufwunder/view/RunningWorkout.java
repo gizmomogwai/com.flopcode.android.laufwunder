@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,22 +21,23 @@ public class RunningWorkout extends Activity {
 	private TextView fTitle;
 
 	private TextView fTotalTime;
-
-	private TextView fTotalPercentage;
-
+	
 	private TextView fCurrentInterval;
 
 	private Button fStop;
 
 	private TextView fCurrentPercentage;
 
+	private IntervalsView fIntervals;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_running_workout);
+		
 		fTitle = (TextView) findViewById(R.id.workout_title);
 		fTotalTime = (TextView) findViewById(R.id.total_time);
-		fTotalPercentage = (TextView) findViewById(R.id.total_percentage);
+		fIntervals = (IntervalsView) findViewById(R.id.intervals);
 		fCurrentInterval = (TextView) findViewById(R.id.current_interval);
 		fCurrentPercentage = (TextView) findViewById(R.id.current_percentage);
 		fStop = (Button) findViewById(R.id.stop);
@@ -49,10 +49,14 @@ public class RunningWorkout extends Activity {
 				}
 			}
 		});
-
-		bindService(getServiceIntent(), fServiceConnection, 0);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		bindService(getServiceIntent(), fServiceConnection, 0);
+	}
+	
 	@Override
 	protected void onPause() {
 		if (fService != null) {
@@ -65,12 +69,6 @@ public class RunningWorkout extends Activity {
 
 	private Intent getServiceIntent() {
 		return new Intent(this, WorkoutService.class);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_running_workout, menu);
-		return true;
 	}
 
 	@Override
@@ -93,7 +91,8 @@ public class RunningWorkout extends Activity {
 			int minutes = secondsOfWorkout / 60;
 			int seconds = secondsOfWorkout % 60;
 			fTotalTime.setText(String.format("TotalTime: %d:%d", minutes, seconds));
-			fTotalPercentage.setText(String.format("%d%%", (int) (100 * fService.getPercentage())));
+			fIntervals.setIntervals(workout.fIntervals);
+			fIntervals.setPercentage(fService.getPercentage());
 			
 			fCurrentInterval.setText(fService.getCurrentInterval().fComment);
 			fCurrentPercentage.setText(String.format("%d%%", (int)(100 * fService.getCurrentIntervalPercentage())));
