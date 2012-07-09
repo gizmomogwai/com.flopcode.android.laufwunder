@@ -1,0 +1,56 @@
+{
+    "title" : "Laufwunder 29",
+    "intervals" :
+    [
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : "10m",
+	    "color" : "#a0a0ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : "10m",
+	    "color" : "#a0a0ff"
+	}
+    ]
+}
