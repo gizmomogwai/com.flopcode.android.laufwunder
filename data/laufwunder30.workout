@@ -1,0 +1,11 @@
+{
+    "title" : "Laufwunder 30",
+    "intervals" :
+    [
+	{
+	    "comment" : "langsamer dauerlauf",
+	    "time" : "40m",
+	    "color" : "#0000ff"
+	}
+    ]
+}
