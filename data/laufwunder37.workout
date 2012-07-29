@@ -1,0 +1,11 @@
+{
+    "title" : "Laufwunder 37",
+    "intervals" :
+    [
+	{
+	    "comment" : "ruhiger Dauerlauf",
+	    "time" : "50m",
+	    "color" : "#a0a0ff"
+	}
+    ]
+}

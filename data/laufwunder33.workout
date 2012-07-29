@@ -1,0 +1,96 @@
+{
+    "title" : "Laufwunder 33",
+    "intervals" :
+    [
+	{
+	    "comment" : "langsamer Dauerlauf",
+	    "time" : "15m",
+	    "color" : "#a0a0ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment" : "schnell",
+	    "time" : "3m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "traben",
+	    "time" : "2m",
+	    "color" : "#0000ff"
+	},
+	{
+	    "comment": "langsamer dauerlauf",
+	    "time" : "10m",
+	    "color" : "#a0a0ff"
+	}
+    ]
+}
