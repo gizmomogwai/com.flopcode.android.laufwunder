@@ -3,7 +3,7 @@
     "intervals" :
     [
 	{
-	    "comment" : "langsamer Dauerlauf",
+	    "comment" : "slow run",
 	    "time" : "80m",
 	    "color" : "#0000ff"
 	}

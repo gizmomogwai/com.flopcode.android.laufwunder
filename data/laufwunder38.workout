@@ -3,32 +3,32 @@
     "intervals" :
     [
 	{
-	    "comment" : "langsamer Dauerlauf",
+	    "comment" : "slow run",
 	    "time" : "10m",
 	    "color" : "#a0a0ff"
 	},
 	{
-	    "comment" : "schnell",
+	    "comment" : "fast",
 	    "time" : "15m",
 	    "color" : "#ff0000"
 	},
 	{
-	    "comment" : "traben",
+	    "comment" : "chill out",
 	    "time" : "5m",
 	    "color" : "#0000ff"
 	},
 	{
-	    "comment" : "schnell",
+	    "comment" : "fast",
 	    "time" : "15m",
 	    "color" : "#ff0000"
 	},
 	{
-	    "comment" : "traben",
+	    "comment" : "chill out",
 	    "time" : "5m",
 	    "color" : "#0000ff"
 	},
 	{
-	    "comment" : "langsamer Dauerlauf",
+	    "comment" : "slow run",
 	    "time" : "10m",
 	    "color" : "#a0a0ff"
 	}

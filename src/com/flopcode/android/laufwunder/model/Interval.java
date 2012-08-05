@@ -43,4 +43,7 @@ public class Interval implements Serializable {
 	public int getMinutes() {
 	  return fTime / 60;
   }
+	public int getSecondsOfMinutes() {
+		return fTime % 60;
+	}
 }

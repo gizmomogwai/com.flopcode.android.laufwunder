@@ -143,7 +143,12 @@ public class WorkoutService extends Service {
 		long startOfInterval = fStartTime;
 		for (Interval interval : fWorkout.fIntervals.asList()) {
 			long next = startOfInterval;
-			fHandler.postAtTime(new TextRunnable(fHandler, "los gehts mit interval " + interval.fComment + " für " + interval.getMinutes() + " minuten"), next);
+			String text = "start of interval " + interval.fComment + " for " + interval.getMinutes() + " minutes";
+			int s = interval.getSecondsOfMinutes();
+			if (s != 0) {
+			 text += " and " + s + " seconds";
+			}
+			fHandler.postAtTime(new TextRunnable(fHandler, text), next);
 			next += ONE_MINUTE;
 			while (true) {
 				if (next < interval.getEndOfInterval(startOfInterval)) {
@@ -156,18 +161,25 @@ public class WorkoutService extends Service {
 			startOfInterval = interval.getEndOfInterval(startOfInterval);
 		}
   }
-
 	private void setWorkoutEvents() {
-	  fHandler.postAtTime(new TextRunnable(fHandler, "ein drittel des ganzen workouts"), fStartTime + (fWorkout.fIntervals.getDurationInMs() / 3));
-		fHandler.postAtTime(new TextRunnable(fHandler, "halbzeit des ganzen workouts"), fStartTime + fWorkout.fIntervals.getDurationInMs() / 2);
-		fHandler.postAtTime(new TextRunnable(fHandler, "zwei drittel des ganzen workouts, weiter so"), fStartTime + 2 * (fWorkout.fIntervals.getDurationInMs() / 3));
-		fEndTime = fStartTime + fWorkout.fIntervals.getDurationInMs();
-		fHandler.postAtTime(new TextRunnable(fHandler, "fertig"), fEndTime);
+		addSpeechEvent("one quarter", fStartTime + fWorkout.fIntervals.getDurationInMs() / 4);
+		addSpeechEvent("half time, right on", fStartTime + fWorkout.fIntervals.getDurationInMs() / 2);
+		addSpeechEvent("three quarters", fStartTime + 3 * fWorkout.fIntervals.getDurationInMs() / 4);
+		
+		addSpeechEvent("one third of the whole workout, yo", fStartTime + (fWorkout.fIntervals.getDurationInMs() / 3));
+	  addSpeechEvent("two thirds of the whole workout, yo, right on", fStartTime + 2 * (fWorkout.fIntervals.getDurationInMs() / 3));
+		
+	  fEndTime = fStartTime + fWorkout.fIntervals.getDurationInMs();
+		addSpeechEvent("finished", fEndTime);
 		fHandler.postAtTime(new Runnable() {
 			public void run() {
 				stopSelf();
 			}
 		}, fEndTime + 5 * ONE_SECOND);
+  }
+
+	private void addSpeechEvent(String text, long at) {
+	  fHandler.postAtTime(new TextRunnable(fHandler, text), at);
   }
 
 	private void initTTS() {
