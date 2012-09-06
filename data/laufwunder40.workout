@@ -1,0 +1,59 @@
+{
+    "title" : "Laufwunder 40",
+    "intervals" :
+    [
+	{
+	    "comment" : "slow run",
+	    "time" : "15m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "fast run",
+	    "time" : "6m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "chillax",
+	    "time" : "3m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "fast run",
+	    "time" : "6m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "chillax",
+	    "time" : "3m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "fast run",
+	    "time" : "6m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "chillax",
+	    "time" : "3m",
+	    "color" : "#00ff00"
+	},
+	{
+	    "comment" : "fast run",
+	    "time" : "6m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "chillax",
+	    "time" : "3m",
+	    "color" : "#00ff00"
+	},
+
+	{
+	    "comment" : "slow run",
+	    "time" : "15m",
+	    "color" : "#0000ff"
+	}
+
+    ]
+}

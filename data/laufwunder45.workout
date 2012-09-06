@@ -1,0 +1,66 @@
+{
+    "title" : "Laufwunder 44",
+    "intervals" :
+    [
+	{
+	    "comment" : "slow run",
+	    "time" : "20m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "steigerung",
+	    "time" : "1m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "slow run",
+	    "time" : "1m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "steigerung",
+	    "time" : "1m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "slow run",
+	    "time" : "1m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "steigerung",
+	    "time" : "1m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "slow run",
+	    "time" : "1m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "steigerung",
+	    "time" : "1m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "slow run",
+	    "time" : "1m",
+	    "color" : "#0000ff"
+	},
+
+	{
+	    "comment" : "steigerung",
+	    "time" : "1m",
+	    "color" : "#ff0000"
+	},
+	{
+	    "comment" : "slow run",
+	    "time" : "1m",
+	    "color" : "#0000ff"
+	}
+    ]
+}
